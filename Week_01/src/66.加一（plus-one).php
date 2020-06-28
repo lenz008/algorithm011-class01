@@ -7,18 +7,13 @@ class Solution {
      * @return Integer[]
      */
     function plusOne($digits) {
-        $digits = array_reverse($digits);
         $count = count($digits);
-        for ($i = 0; $i < $count; $i++) {
-            $digits[$i] = $digits[$i] + 1;
-            if($digits[$i] >= 10) {
-                $digits[$i] -= 10;
-                $digits[$i+1] = isset($digits[$i+1]) ? $digits[$i+1] : 1;
-                continue;
-            } else {
-                break;
-            }
+        for ($i =  $count - 1; $i >= 0; $i--) {
+            $digits[$i]++;
+            $digits[$i] = $digits[$i] % 10;
+            if ($digits[$i] != 0) return $digits;
         }
-        return array_reverse($digits);
+        array_unshift($digits,1);
+        return $digits;
     }
 }
